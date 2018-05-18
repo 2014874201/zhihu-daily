@@ -155,7 +155,7 @@
     position: absolute;
     right: 0;
     left: 0;
-    bottom: 12px;
+    bottom: 24px;
     text-align: center;
     font-size: 0;
     .dot {
@@ -164,9 +164,10 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: $color-text-l;
+      background: gray;
       &.active {
-        width: 20px;
+        width: 10px;
+        font-weight: 800;
         border-radius: 5px;
         background: $color-text-ll;
       }
