@@ -108,52 +108,19 @@ export default {
         }
         p {
           position: relative;
-          width: 3rem;
+          width: 300px;
           // height: 1rem;
-          background: pink;
+          // background: pink;
           bottom: 0.5rem; 
-          // word-wrap: break-word; 
+          word-wrap: break-word; 
           // word-break: break-all; 
           // overflow:inherit;
           z-index: 3;
           color:#fff;
         }
       }
-      .recommend-list {
-        .list-title {
-          height: 65px;
-          line-height: 65px;
-          text-align: center;
-          font-size: $font-size-medium;
-          color: $color-theme;
-        }
-        .item {
-          display: flex;
-          box-sizing: border-box;
-          align-items: center;
-          padding: 0 20px 20px 20px;
-          .icon {
-            flex: 0 0 60px;
-            width: 60px;
-            padding-right: 20px;
-          }
-          .text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex: 1;
-            line-height: 20px;
-            overflow: hidden;
-            font-size: $font-size-medium;
-            .name {
-              margin-bottom: 10px;
-              color: $color-text;
-            }
-            .desc {
-              color: $color-text-d;
-            }    
-          }
-        }
+      .newlist{
+        background: gray;
       }
       .loading-container {
         position: absolute;
