@@ -1,15 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Recommend from '@/components/recommend'
+import Disc from '@/components/disc.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path:'/',  
+      redirect: '/recommend' // 重定向，默认进来根路径指向推荐页面
+    },
+    {
+      path: '/recommend',
+      component: Recommend,
+      children: [{
+        path: '/recommend/disc',
+        component: Disc
+      }]
     }
   ]
 })

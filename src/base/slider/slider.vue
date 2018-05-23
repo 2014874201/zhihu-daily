@@ -139,6 +139,7 @@
       box-sizing: border-box;
       overflow: hidden;
       text-align: center;
+      background: #f2f5f7;    
       a {
         display: block;
         width: 100%;

@@ -5,7 +5,12 @@ import App from './App'
 import router from './router'
 import 'common/scss/index.scss'
 import axios from 'axios'
+import VueLazyload from 'vue-lazyload'
 
+
+Vue.use(VueLazyload, {
+  loading: require('common/image/default.gif')
+})
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
