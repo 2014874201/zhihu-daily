@@ -6,18 +6,17 @@
       <span>icon</span>
     </div>
     <div class="recommend">
-      <scroll ref="scroll" class="recommend-content" :data=recommendDataImg>
-      <!-- better-scroll 只处理容器（wrapper）的第一个子元素（content）的滚动，其它的元素都会被忽略。 -->
+      <scroll ref="scroll" class="recommend-content">
         <div>
-          <!-- 保证是有，才进入插槽 -->
           <div class="slider-wrapper" v-if="recommendDataImg.length && recommendDataList.length">
             <slider>
               <div v-for="item in recommendDataImg" :key="item.key" @click="selectItem(item)">
                 <img @load="loadImage" :src="item.image" >
-                <div class="word" v-html="item.title"></div>
+                <div class="mask"></div>
+                <h3>{{item.title}}</h3>
               </div>
             </slider>
-          </div>
+          </div>                                                
           <!-- 新闻列表 -->
           <div class="recommend-list">
             <h1 class="list-title">今日热闻</h1>
@@ -68,16 +67,16 @@ export default {
         query: {
           id: item.id
         }
-      })
-      // this.setDisc(item)                                                                                               
+      })                                                                                 
     },
     getRecommend () {
       this.$http.get('http://zhihu-agent.herokuapp.com/get?api=/4/news/latest', {})
       .then( res=>{
         console.log(res)
         if (res.status === 200) {
-          this.recommendDataImg =res.data.top_stories
-          this.recommendDataList =res.data.stories
+          this.recommendDataImg = res.data.top_stories
+          this.recommendDataList = res.data.stories
+          this.$refs.scroll.refresh() // 计算高度
           console.log('列表',this.recommendDataList)
         }
       })
@@ -88,7 +87,7 @@ export default {
     loadImage() {
       if (!this.checkloaded) {
         this.checkloaded = true
-        this.$refs.scroll.refresh()
+        this.$refs.scroll.refresh() // 重新计算高度
       }
     }
   } 
@@ -96,6 +95,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "src/common/scss/variable.scss";
+
 .Home {
   position: absolute;
   top:0;
@@ -120,24 +120,57 @@ export default {
     width: 100%;
     top: 45px;
     bottom: 0;
+    // box-sizing: border-box;
     .recommend-content {
       height: 100%;
       overflow: hidden;
-      // overflow: auto;
       .slider-wrapper {
         position: relative;
-        width: 100%;
-        // overflow: hidden;
+        overflow: hidden;
         img{
           height: 2.7rem;
-          background-size: cover;
+          background-size: 100% 100%;
         }
-        .word{
-          
-        } 
+        .mask {
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.05;
+          position: absolute;
+          background: $blue;
+        }
+        h3 {
+          width: 100%;
+          height: 200px;
+          background: red;
+          word-break: normal;
+        }
+        // h3 {
+        //   z-index: 999;
+        //   width: 70%;
+        //   color: #fff;
+        //   margin: 0;
+        //   font-size: 0.5rem;
+        //   line-height: 1rem;
+        //   right: 5%;
+        //   bottom: 0.6rem;
+        //   text-align: right;
+        //   position: absolute;
+        //   text-shadow: 1px 1px 10px rgba(0, 0, 0, .5);
+        //   &:before {
+        //       content: "";
+        //       width: 3rem;
+        //       bottom: -.6rem;
+        //       right: 0;
+        //       display: block;
+        //       position: absolute;
+        //       border: 2px solid yellow;
+        //   }
+        // }
       }
       .recommend-list {
-        background: #f2f5f7;    
+        background:#f9faff;
         .list-title {
           height: 0.35rem;
           padding-left: 10px;
@@ -153,7 +186,8 @@ export default {
           padding: 15px 20px 15px 20px;
           border-radius: 10px;
           background: #fff;
-          box-shadow: 0.1px  1px 1px #888888;
+          box-shadow: 0 3px 10px 0 rgba(91, 115, 146, 0.15);
+          // box-shadow: 0.1px  1px 1px #888888;
           .icon {
             flex: 0 0 60px; 
             width: 60px;

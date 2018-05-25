@@ -137,7 +137,9 @@ export default {
     },
     refresh() {
       // 代理better-scroll的refresh方法
-      this.scroll && this.scroll.refresh();
+      setTimeout(() => {
+        this.scroll && this.scroll.refresh();
+      }, this.refreshDelay)
     },
     scrollTo() {
       // 代理better-scroll的scrollTo方法
