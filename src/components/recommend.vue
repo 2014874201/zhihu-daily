@@ -37,10 +37,13 @@
         </div>
       </scroll>
     </div>
+    <!-- 回到顶部组件 -->
+	  <!-- <back-scroll :scroller="scroller" :flag="circle"></back-scroll> -->
     <router-view></router-view>
   </div>
 </template>
 <script>
+import api from '@/api/index'
 import Slider from 'base/slider/slider.vue'
 import Scroll from 'base/scroll/scroll.vue'
 import Loading from 'base/loading/loading'
@@ -52,7 +55,7 @@ export default {
     }
   },
   created () {
-    this.getRecommend()
+    this.getRecommend(1)
   },
   components: {
     Slider,
@@ -69,20 +72,38 @@ export default {
         }
       })                                                                                 
     },
-    getRecommend () {
-      this.$http.get('http://zhihu-agent.herokuapp.com/get?api=/4/news/latest', {})
-      .then( res=>{
-        console.log(res)
-        if (res.status === 200) {
-          this.recommendDataImg = res.data.top_stories
-          this.recommendDataList = res.data.stories
-          this.$refs.scroll.refresh() // 计算高度
-          console.log('列表',this.recommendDataList)
-        }
-      })
-      .catch( err=> {
-        console.log(err);
-      })
+    getRecommend (type) {
+      console.log('进入')
+      // if(type) {
+      //   api.getNews().then(res=>{
+      //     console.log(res)
+      //     if (res.status === 200) {
+      //       this.recommendDataImg = res.data.top_stories
+      //       this.recommendDataList = res.data.stories
+      //       this.$refs.scroll.refresh() // 计算高度
+      //       console.log('列表',this.recommendDataList)
+      //     }
+      //   })
+      //   .catch( err=> {
+      //     console.log(err);
+      //   })
+      // } else {
+      //   console.log(按照日期加载)
+      // }
+
+      // this.$http.get('http://zhihu-agent.herokuapp.com/get?api=/4/news/latest', {})
+      // .then( res=>{
+      //   console.log(res)
+      //   if (res.status === 200) {
+      //     this.recommendDataImg = res.data.top_stories
+      //     this.recommendDataList = res.data.stories
+      //     this.$refs.scroll.refresh() // 计算高度
+      //     console.log('列表',this.recommendDataList)
+      //   }
+      // })
+      // .catch( err=> {
+      //   console.log(err);
+      // })
     },
     loadImage() {
       if (!this.checkloaded) {
@@ -140,12 +161,12 @@ export default {
           position: absolute;
           background: $blue;
         }
-        h3 {
-          width: 100%;
-          height: 200px;
-          background: red;
-          word-break: normal;
-        }
+        // h3 {
+        //   width: 100%;
+        //   height: 200px;
+        //   background: red;
+        //   word-break: normal;
+        // }
         // h3 {
         //   z-index: 999;
         //   width: 70%;
