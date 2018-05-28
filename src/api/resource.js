@@ -4,5 +4,6 @@ var zhihuApi = {
     news:'/4/news/latest'
 }
 
-export const NewsResource = API_ROOT.concat(zhihuApi.news)
+const NewsResource = API_ROOT.concat(zhihuApi.news)
+export default NewsResource
 
