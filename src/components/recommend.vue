@@ -1,5 +1,6 @@
 <template>
   <div class="Home">
+    <!-- <back-top></back-top> -->
     <div class="header">
       <span>icon</span>
       <span>题目</span>
@@ -47,6 +48,7 @@ import api from '@/api/index'
 import Slider from 'base/slider/slider.vue'
 import Scroll from 'base/scroll/scroll.vue'
 import Loading from 'base/loading/loading'
+import BackTop from 'base/backtop/backtop'
 export default {
   data () {
     return {
@@ -61,7 +63,8 @@ export default {
   components: {
     Slider,
     Scroll,
-    Loading
+    Loading,
+    BackTop
   },
   methods: {
     selectItem(item) {
@@ -190,11 +193,13 @@ export default {
         background:#f9faff;
         .list-title {
           height: 0.35rem;
+          width: 2rem;
           padding-left: 10px;
           line-height: 35px;
           text-align: left;
           font-size: $font-size-large;
           color: rgb(158, 153, 154);
+          background: #fff;
         }
         .item {
           display: flex;
