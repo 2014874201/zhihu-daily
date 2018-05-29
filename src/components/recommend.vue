@@ -51,7 +51,8 @@ export default {
   data () {
     return {
       recommendDataImg:[],
-      recommendDataList:[]
+      recommendDataList:[],
+      count: 1
     }
   },
   created () {
@@ -74,37 +75,35 @@ export default {
     },
     getRecommend (type) {
       console.log('进入')
-      // if(type) {
-      //   api.getNews().then(res=>{
-      //     console.log(res)
-      //     if (res.status === 200) {
-      //       this.recommendDataImg = res.data.top_stories
-      //       this.recommendDataList = res.data.stories
-      //       this.$refs.scroll.refresh() // 计算高度
-      //       console.log('列表',this.recommendDataList)
-      //     }
-      //   })
-      //   .catch( err=> {
-      //     console.log(err);
-      //   })
-      // } else {
-      //   console.log(按照日期加载)
-      // }
-
-      // this.$http.get('http://zhihu-agent.herokuapp.com/get?api=/4/news/latest', {})
-      // .then( res=>{
-      //   console.log(res)
-      //   if (res.status === 200) {
-      //     this.recommendDataImg = res.data.top_stories
-      //     this.recommendDataList = res.data.stories
-      //     this.$refs.scroll.refresh() // 计算高度
-      //     console.log('列表',this.recommendDataList)
-      //   }
-      // })
-      // .catch( err=> {
-      //   console.log(err);
-      // })
+      if(type) {
+        api.getNews().then(res=>{
+          console.log(res)
+          if (res.status === 200) {
+            this.recommendDataImg = res.data.top_stories
+            this.recommendDataList = res.data.stories
+            this.$refs.scroll.refresh() // 计算高度
+            console.log('列表',this.recommendDataList)
+          }
+        })
+        .catch( err=> {
+          console.log(err);
+        })
+      } else {
+        // api.getNewsByDate(this.GetDate(this.count)).then(data=>{
+				// 	this.recommendDataList.push(data.data);
+				// });
+      }
     },
+    GetDate(Count) {
+			var dd = new Date(); // 获取当前时间Tue May 29 2018 11:55:16 GMT+0800
+			dd.setDate(dd.getDate() + Count); //获取AddDayCount天后的日期 29
+			var y = dd.getFullYear(); //2018
+			var m = dd.getMonth() + 1; //获取当前月份的日期 5
+			m = m >= 10 ? m : "0" + m //小于10 则显示05，大于等于10，照常显示
+			var d = dd.getDate();
+			d = d >= 10 ? d : "0" + d; // 日期也是
+			return y + "" + m + "" + d;  // 返回形式 20180529
+		},
     loadImage() {
       if (!this.checkloaded) {
         this.checkloaded = true
@@ -161,12 +160,9 @@ export default {
           position: absolute;
           background: $blue;
         }
-        // h3 {
-        //   width: 100%;
-        //   height: 200px;
-        //   background: red;
-        //   word-break: normal;
-        // }
+        h3 {
+          color: black;
+        }
         // h3 {
         //   z-index: 999;
         //   width: 70%;
@@ -213,12 +209,10 @@ export default {
             flex: 0 0 60px; 
             width: 60px;
             padding-left:10px;
-            // padding-right: 10px;
           }
           .text {
             text-align: left;
             flex: 1;
-            line-height: 20px;
             overflow: hidden;
             font-size: $font-size-large;
             .desc {
