@@ -13,11 +13,11 @@ export default new Router({
     },
     {
       path: '/recommend',
-      component: Recommend,
-      children: [{
-        path: '/recommend/disc',
-        component: Disc
-      }]
-    }
+      component: Recommend
+    },
+    {
+      path:'/disc',  
+      component: Disc
+    },
   ]
 })

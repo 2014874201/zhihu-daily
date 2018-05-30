@@ -9,7 +9,7 @@
     <div class="recommend">
       <scroll ref="scroll" class="recommend-content">
         <div>
-          <div class="slider-wrapper" v-if="recommendDataImg.length && recommendDataList.length">
+          <div class="slider-wrapper">
             <slider>
               <div v-for="item in recommendDataImg" :key="item.key" @click="selectItem(item)">
                 <img @load="loadImage" :src="item.image" >
@@ -33,9 +33,9 @@
             </ul>
           </div>
         </div>
-        <div class="loading-containter" v-show="!recommendDataImg.length">  
+        <!-- <div class="loading-containter" v-show="!recommendDataImg.length">  
           <loading></loading>
-        </div>
+        </div> -->
       </scroll>
     </div>
     <!-- 回到顶部组件 -->
